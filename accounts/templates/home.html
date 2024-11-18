@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Books App</title>
+  <!-- ... (CSS styles remain the same) ... -->
+</head>
+<body>
+  <h1>Book List</h1>
+  <ul>
+    {% for book in page_obj.object_list %}
+    <li>
+      <h2>{{ book.title }}</h2>
+      <p>Author: {{ book.author }}</p>
+      <p>Status: {{ book_statuses.get|default_if_none:"available" }}</p>
+    </li>
+    {% endfor %}
+  </ul>
+
+  <div class="pagination">
+    {% if page_obj.has_previous %}
+      <a href="?page={{ page_obj.previous_page_number }}">Previous</a>
+    {% endif %}
+
+    {% if page_obj.has_next %}
+      <a href="?page={{ page_obj.next_page_number }}">Next</a>
+    {% endif %}
+  </div>
+</body>
+</html>
